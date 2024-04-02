@@ -1,0 +1,88 @@
+openapi: 3.0.3
+info:
+  title: User API
+  description: API to retrieve user information
+  version: 0.0.1
+paths:
+  /user:
+    post:
+      operationId: createUser
+      summary: Create User
+      description: Endpoint to populate user details
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "201":
+          description: User created
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Bad request
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Server error
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    get:
+      operationId: findUser
+      summary: Find User(s) with matching last name
+      description: Retrieve an account access consent and check its status.
+      parameters:
+        - name: lastName
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        "200":
+          description: User(s) found
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "400":
+          description: Bad request
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Server error
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        surname:
+          type: string
+        firstName:
+          type: string
+        emailAddress:
+          type: string
+      required:
+        - surname
