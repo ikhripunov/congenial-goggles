@@ -16,11 +16,11 @@ class UserServiceTest {
     @Test
     fun basicTest() {
         val user = User("foo", "bar", "baz@taz.com", UUID.randomUUID())
-        `when`( repo.findBySurname("foo")).thenReturn(listOf(user).toMutableList())
+        `when`( repo.findBySurname("foo")).thenReturn(listOf(user).toList())
         val findUser = userService.findUser("foo")
         assert(findUser.isNotEmpty())
-        assert(findUser[0].surname.equals("foo"))
+        assert(findUser[0].lastName.equals("foo"))
         assert(findUser[0].firstName.equals("bar"))
-        assert(findUser[0].emailAddress.equals("baz@taz.com"))
+        assert(findUser[0].email.equals("baz@taz.com"))
     }
 }

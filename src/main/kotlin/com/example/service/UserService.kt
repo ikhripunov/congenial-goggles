@@ -1,7 +1,7 @@
 package com.example.service
 
 import com.example.entity.mapper.UserMapper
-import com.example.model.User
+import com.example.model.UserDTO
 import com.example.repository.UserRepository
 import jakarta.validation.Valid
 import org.mapstruct.factory.Mappers
@@ -16,12 +16,12 @@ class UserService(
 
     val mapper = Mappers.getMapper(UserMapper::class.java)
 
-    fun createUser(@Valid user: User): User {
+    fun createUser(@Valid user: UserDTO): UserDTO {
         val saved = repo.save(mapper.dtoToEntity(user))
         return mapper.entityToDto(saved)
     }
 
-    fun findUser(lastName: String): MutableList<User> {
+    fun findUser(lastName: String): MutableList<UserDTO> {
         val findBySurname = repo.findBySurname(lastName)
         return findBySurname.map { user: com.example.entity.User -> mapper.entityToDto(user) }.toMutableList()
     }

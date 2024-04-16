@@ -1,20 +1,20 @@
 package com.example.controller
 
-import com.example.api.UserApi
-import com.example.model.User
+import com.example.api.UsersApi
+import com.example.model.UserDTO
 import com.example.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class UserController(@Autowired val userService: UserService) : UserApi {
+class UserController(@Autowired val userService: UserService) : UsersApi {
 
-    override fun createUser(user: User?): ResponseEntity<User> {
-        return ResponseEntity.ok(userService.createUser(user!!))
+    override fun createUser(userDTO: UserDTO?): ResponseEntity<UserDTO> {
+        return ResponseEntity.ok(userService.createUser(userDTO!!))
     }
 
-    override fun findUser(lastName: String?): ResponseEntity<MutableList<User>> {
-        return ResponseEntity.ok(userService.findUser(lastName!!))
+    override fun findUserByLastName(lastName: String): ResponseEntity<List<UserDTO>> {
+        return ResponseEntity.ok(userService.findUser(lastName))
     }
 }

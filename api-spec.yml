@@ -4,7 +4,7 @@ info:
   description: API to retrieve user information
   version: 0.0.1
 paths:
-  /user:
+  /users:
     post:
       operationId: createUser
       summary: Create User
@@ -13,14 +13,14 @@ paths:
         content:
           'application/json':
             schema:
-              $ref: "#/components/schemas/User"
+              $ref: "#/components/schemas/UserDTO"
       responses:
         "201":
           description: User created
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/UserDTO"
         "400":
           description: Bad request
           content:
@@ -34,7 +34,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
     get:
-      operationId: findUser
+      operationId: findUserByLastName
       summary: Find User(s) with matching last name
       description: Retrieve an account access consent and check its status.
       parameters:
@@ -52,7 +52,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/User"
+                  $ref: "#/components/schemas/UserDTO"
         "400":
           description: Bad request
           content:
@@ -72,17 +72,17 @@ components:
       properties:
         message:
           type: string
-    User:
+    UserDTO:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        surname:
-          type: string
         firstName:
           type: string
-        emailAddress:
+        lastName:
+          type: string
+        email:
           type: string
       required:
         - surname

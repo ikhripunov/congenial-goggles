@@ -1,10 +1,10 @@
 package com.example.entity.mapper
 
-import com.example.model.User
+import com.example.model.UserDTO
 import org.mapstruct.Mapper
 
 @Mapper
 interface UserMapper {
-    fun dtoToEntity(dto:User):com.example.entity.User
-    fun entityToDto(entity:com.example.entity.User):User
+    fun dtoToEntity(dto:UserDTO):com.example.entity.User
+    fun entityToDto(entity:com.example.entity.User):UserDTO
 }
