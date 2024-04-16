@@ -3,24 +3,25 @@ info:
   title: User API
   description: API to retrieve user information
   version: 0.0.1
+tags:
+  - name: users
+    description: Everything about users
 paths:
-  /users:
+  /v1/users:
     post:
       operationId: createUser
       summary: Create User
       description: Endpoint to populate user details
+      tags:
+        - users
       requestBody:
         content:
           'application/json':
             schema:
               $ref: "#/components/schemas/UserDTO"
       responses:
-        "201":
+        "204":
           description: User created
-          content:
-            'application/json':
-              schema:
-                $ref: "#/components/schemas/UserDTO"
         "400":
           description: Bad request
           content:
@@ -37,6 +38,8 @@ paths:
       operationId: findUserByLastName
       summary: Find User(s) with matching last name
       description: Retrieve an account access consent and check its status.
+      tags:
+        - users
       parameters:
         - name: lastName
           in: query

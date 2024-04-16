@@ -30,6 +30,7 @@ openApiGenerate {
     modelPackage.set("com.example.model")
     configOptions.put("useSpringBoot3", "true")
     configOptions.put("interfaceOnly", "true")
+    configOptions.put("useTags", "true")
 }
 
 dependencies {
