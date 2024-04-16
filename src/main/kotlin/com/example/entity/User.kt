@@ -6,11 +6,11 @@ import java.util.*
 @Entity
 class User (
     @Column
-    val surname: String,
+    val lastName: String,
     @Column
     val firstName: String?,
     @Column
-    val emailAddress: String?,
+    val email: String?,
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID?=null

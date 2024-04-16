@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.9.23"
     kotlin("plugin.spring") version "1.9.23"
     kotlin("plugin.jpa") version "1.9.23"
+    kotlin("kapt") version "1.9.23"
     id("org.openapi.generator") version "6.6.0"
 }
 
@@ -21,7 +22,7 @@ java {
 }
 
 openApiGenerate {
-    generatorName.set("kotlin-spring")
+    generatorName.set("spring")
     inputSpec.set("$rootDir/api-spec.yml")
     outputDir.set("$buildDir/generated")
     apiPackage.set("com.example.api")
@@ -41,22 +42,14 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("jakarta.validation:jakarta.validation-api:3.0.2")
     implementation("org.openapitools:jackson-databind-nullable:0.2.6")
-    implementation("org.mapstruct:mapstruct:1.5.5.Final")
     implementation("com.google.code.gson:gson:2.10.1")
+    implementation("org.mapstruct:mapstruct:1.5.5.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     runtimeOnly("com.h2database:h2")
 }
-java.sourceSets["main"].java.srcDir("$buildDir/generated/src/main/kotlin")
-
+java.sourceSets["main"].java.srcDir("$buildDir/generated/src/main/java")
 java.sourceSets["main"].resources.srcDir("$buildDir/generated/src/main/resources")
-
-tasks.compileKotlin {
-    dependsOn("openApiGenerate")
-}
-
-tasks.openApiGenerate {
-    dependsOn("processResources")
-}
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
