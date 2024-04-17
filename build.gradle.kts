@@ -1,4 +1,6 @@
+import org.jetbrains.kotlin.gradle.tasks.KaptGenerateStubs
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     id("org.springframework.boot") version "3.2.4"
@@ -55,6 +57,14 @@ tasks.withType<KotlinCompile> {
         freeCompilerArgs += "-Xjsr305=strict"
         jvmTarget = "17"
     }
+}
+
+tasks.withType<KotlinJvmCompile> {
+    dependsOn("openApiGenerate")
+}
+
+tasks.processResources {
+    dependsOn("openApiGenerate")
 }
 
 tasks.withType<Test> {
