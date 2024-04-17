@@ -85,7 +85,8 @@ components:
           type: string
         lastName:
           type: string
+          minLength: 1
         email:
           type: string
       required:
-        - surname
+        - lastName
